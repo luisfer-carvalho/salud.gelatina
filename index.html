@@ -169,10 +169,10 @@ body{font-family:'Source Serif 4',Georgia,serif;background:#fff;color:#111;}
   <div class="video-wrapper" id="video-section">
     <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;">
       <iframe
-        src="https://player.vimeo.com/video/1174966780?title=0&byline=0&portrait=0"
-        style="position:absolute;top:0;left:0;width:100%;height:100%;"
-        frameborder="0"
-        allow="autoplay; fullscreen"
+        id="panda-307c2b73-9373-404f-8876-dd192f3843e6"
+        src="https://player-vz-cccf70c3-0af.tv.pandavideo.com.br/embed/?v=307c2b73-9373-404f-8876-dd192f3843e6&hide_progress_bar=1"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
         allowfullscreen>
       </iframe>
     </div>
@@ -459,12 +459,11 @@ setInterval(function(){
   }
   // Fallback: 60 segundos
   setTimeout(showCTA, 60000);
-  // Vimeo postMessage API — detecta fim do vídeo
+  // Panda Video postMessage API — detecta fim do vídeo
   window.addEventListener('message',function(e){
-    if(e.origin.indexOf('vimeo.com') === -1) return;
     try{
       var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-      if(data && data.event === 'finish'){showCTA();}
+      if(data && (data.event === 'finish' || data.event === 'ended' || data.type === 'ended')){showCTA();}
     }catch(err){}
   });
 })();
